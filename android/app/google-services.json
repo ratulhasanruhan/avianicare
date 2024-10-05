@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "331162971037",
+    "project_id": "avianicare-1ac52",
+    "storage_bucket": "avianicare-1ac52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331162971037:android:8045e61ab0c850223e9d74",
+        "android_client_info": {
+          "package_name": "com.pet.avianicare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeMV3Tl4MfFeq4lTBttmEZca4HbXd6fRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
