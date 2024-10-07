@@ -1,16 +1,6 @@
-# shopking_customer_app
+# Avianicare
+## AVIAN AND ANIMAL CARE BANGLADESH
 
-A new Flutter project.
+### Tagline: Every Life Matters
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="286" alt="Group 1000002938" src="https://github.com/user-attachments/assets/781bebd4-38ae-4a08-879c-c7b68b3847aa">
