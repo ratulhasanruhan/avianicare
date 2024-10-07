@@ -16,7 +16,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
-      Get.offNamed(Routes.navBarView);
+      Get.offNamed(Routes.onBoarding);
     });
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value:const SystemUiOverlayStyle(

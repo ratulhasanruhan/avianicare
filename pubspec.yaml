@@ -70,15 +70,7 @@ flutter:
 
 flutter_launcher_icons:
   android: "ic_launcher"
-  image_path: "assets/images/app_icon.png"
-  web:
-    generate: true
-    image_path: "assets/images/app_icon.png"
-    background_color: "#hexcode"
-    theme_color: "#479B76"
-  windows:
-    generate: true
-    image_path: "assets/images/app_icon.png"
+  image_path: "assets/images/icon.png"
 
 
 flutter_native_splash:

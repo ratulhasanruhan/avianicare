@@ -11,4 +11,7 @@ class Routes {
   static const subCategory = '/subCategory/';
   static const categoryWiseProductView = "/categoryWiseProductView/";
   static const cartScreen = "/cartScreen/";
+
+  static const onBoarding = "/onBoarding/";
+
 }

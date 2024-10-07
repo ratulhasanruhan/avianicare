@@ -1,3 +1,4 @@
+import 'package:avianicare/app/modules/onboard/views/onboard.dart';
 import 'package:get/get.dart';
 import 'package:avianicare/app/modules/category/bindings/category_bindings.dart';
 
@@ -40,6 +41,10 @@ class AppPages {
       name: Routes.language,
       page: () => const ChangeLanguageView(),
       binding: LanguageBindings(),
-    )
+    ),
+    GetPage(
+      name: Routes.onBoarding,
+      page: () => const OnBoarding(),
+    ),
   ];
 }
