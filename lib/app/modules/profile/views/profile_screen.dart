@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Scaffold(
               backgroundColor: AppColor.primaryBackgroundColor,
-              appBar: AppBar(
+   /*           appBar: AppBar(
                 backgroundColor: AppColor.primaryBackgroundColor,
                 elevation: 0,
                 toolbarHeight: 48.h,
@@ -94,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: 73.w,
                   ),
                 ),
-              ),
+              ),*/
               body: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
@@ -445,13 +445,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             )
                           : SizedBox(),
-                      MenuWidget(
-                        text: 'CHANGE_LANGUAGE'.tr,
-                        icon: SvgIcon.language,
-                        onTap: () {
-                          Get.to(() => const ChangeLanguageView());
-                        },
-                      ),
                       const DeviderWidget(),
                       Obx(
                         () => SizedBox(

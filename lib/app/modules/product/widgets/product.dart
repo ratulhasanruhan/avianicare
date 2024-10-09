@@ -48,172 +48,174 @@ class ProductWidget extends StatelessWidget {
         width: 156.w,
         decoration: BoxDecoration(
           color: AppColor.whiteColor,
+          border: Border.all(color: Color(0xFFD8D8D8)),
           borderRadius: BorderRadius.circular(12.r),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                offset: const Offset(0, 0),
-                blurRadius: 7.r,
-                spreadRadius: 0),
-          ],
         ),
-        child: Padding(
-          padding: EdgeInsets.all(8.r),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  CachedNetworkImage(
-                    imageUrl: productImage.toString(),
-                    imageBuilder: (context, imageProvider) => Container(
-                      height: 160.h,
-                      width: 140.w,
-                      decoration: BoxDecoration(
-                        color: AppColor.whiteColor,
-                        borderRadius: BorderRadius.circular(8.r),
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: productImage.toString(),
+                  imageBuilder: (context, imageProvider) => Container(
+                    height: 190.h,
+                    decoration: BoxDecoration(
+                      color: AppColor.whiteColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12.r),
+                        topRight: Radius.circular(12.r),
                       ),
+                      image: DecorationImage(
+                          image: imageProvider, fit: BoxFit.cover),
                     ),
                   ),
-                  Positioned(
-                    left: 6.w,
-                    right: 6.w,
-                    top: 6.h,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        flashSale == true
-                            ? Container(
-                                height: 18.h,
-                                width: 57.w,
+                ),
+                Positioned(
+                  left: 6.w,
+                  right: 6.w,
+                  top: 6.h,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      flashSale == true
+                          ? Container(
+                              height: 18.h,
+                              width: 57.w,
+                              decoration: BoxDecoration(
+                                color: AppColor.blueColor,
+                                borderRadius: BorderRadius.circular(9.r),
+                              ),
+                              child: Center(
+                                child: TextWidget(
+                                  text: 'Flash Sale'.tr,
+                                  color: AppColor.whiteColor,
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            )
+                          : const SizedBox(),
+                      wishlist == false
+                          ? InkWell(
+                              onTap: favTap,
+                              child: Container(
+                                height: 30,
+                                width: 30,
                                 decoration: BoxDecoration(
-                                  color: AppColor.blueColor,
-                                  borderRadius: BorderRadius.circular(9.r),
+                                  color: AppColor.whiteColor,
+                                  borderRadius: BorderRadius.circular(6.r),
                                 ),
                                 child: Center(
-                                  child: TextWidget(
-                                    text: 'Flash Sale'.tr,
-                                    color: AppColor.whiteColor,
-                                    fontSize: 10.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              )
-                            : const SizedBox(),
-                        wishlist == false
-                            ? InkWell(
-                                onTap: favTap,
-                                child: Container(
-                                  height: 18.r,
-                                  width: 18.r,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.whiteColor,
-                                    borderRadius: BorderRadius.circular(18.r),
-                                  ),
-                                  child: Center(
-                                    child: SvgPicture.asset(
-                                      SvgIcon.heart,
-                                      height: 12.h,
-                                      width: 12.w,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : InkWell(
-                                onTap: favTap,
-                                child: Container(
-                                  height: 18.r,
-                                  width: 18.r,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.whiteColor,
-                                    borderRadius: BorderRadius.circular(18.r),
-                                  ),
-                                  child: Center(
-                                    child: SvgPicture.asset(
-                                      SvgIcon.filledHeart,
-                                      height: 12.h,
-                                      width: 12.w,
-                                    ),
+                                  child: SvgPicture.asset(
+                                    SvgIcon.heart,
+                                    height: 18,
+                                    width: 18,
+                                    color: Color(0xFFA8A8A8),
                                   ),
                                 ),
                               ),
+                            )
+                          : InkWell(
+                              onTap: favTap,
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  borderRadius: BorderRadius.circular(6.r),
+                                ),
+                                child: Center(
+                                  child: SvgPicture.asset(
+                                    SvgIcon.filledHeart,
+                                    height: 18,
+                                    width: 18,
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 4.h,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    child: TextWidget(
+                      text: title ?? '',
+                      color: AppColor.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      maxLines: 2,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  RatingBarIndicator(
+                    rating: double.parse(rating.toString() == 'null'
+                        ? '0'
+                        : (double.parse(rating.toString()) / textRating!.toInt())
+                            .toString()),
+                    itemSize: 10.h,
+                    unratedColor: AppColor.inactiveColor,
+                    itemBuilder: (context, index) => Container(
+                      margin: EdgeInsets.symmetric(horizontal: 1.w),
+                      child: SvgPicture.asset(
+                        SvgIcon.star,
+                        colorFilter: const ColorFilter.mode(
+                            AppColor.yellowColor, BlendMode.srcIn),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  TextWidget(
+                    text:
+                        "${rating.toString() == 'null' ? '0' : double.parse(rating.toString()) / textRating!.toInt()} (${textRating ?? 0} ${' Reviews'.tr})",
+                    color: AppColor.textColor1,
+                    fontSize: 9.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  FittedBox(
+                    child: Row(
+                      children: [
+                        TextWidget(
+                          text: discountPrice ?? '0',
+                          color: AppColor.textColor,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        isOffer == true
+                            ? TextWidget(
+                                text: currentPrice ?? '0',
+                                color: AppColor.redColor,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700,
+                                decoration: TextDecoration.lineThrough,
+                              )
+                            : const SizedBox(),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
-              SizedBox(
-                height: 8.h,
-              ),
-              SizedBox(
-                child: TextWidget(
-                  text: title ?? '',
-                  color: AppColor.textColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  maxLines: 2,
-                  overflow: TextOverflow.fade,
-                ),
-              ),
-              SizedBox(
-                height: 4.h,
-              ),
-              RatingBarIndicator(
-                rating: double.parse(rating.toString() == 'null'
-                    ? '0'
-                    : (double.parse(rating.toString()) / textRating!.toInt())
-                        .toString()),
-                itemSize: 10.h,
-                unratedColor: AppColor.inactiveColor,
-                itemBuilder: (context, index) => Container(
-                  margin: EdgeInsets.symmetric(horizontal: 1.w),
-                  child: SvgPicture.asset(
-                    SvgIcon.star,
-                    colorFilter: const ColorFilter.mode(
-                        AppColor.yellowColor, BlendMode.srcIn),
-                  ),
-                ),
-              ),
-              SizedBox(height: 4.h),
-              TextWidget(
-                text:
-                    "${rating.toString() == 'null' ? '0' : double.parse(rating.toString()) / textRating!.toInt()} (${textRating ?? 0} ${' Reviews'.tr})",
-                color: AppColor.textColor1,
-                fontSize: 9.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              SizedBox(
-                height: 12.h,
-              ),
-              FittedBox(
-                child: Row(
-                  children: [
-                    TextWidget(
-                      text: discountPrice ?? '0',
-                      color: AppColor.textColor,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    isOffer == true
-                        ? TextWidget(
-                            text: currentPrice ?? '0',
-                            color: AppColor.redColor,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w700,
-                            decoration: TextDecoration.lineThrough,
-                          )
-                        : const SizedBox(),
-                  ],
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
