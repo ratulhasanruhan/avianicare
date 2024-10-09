@@ -170,7 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   fontSize: 16.sp),
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
-                              obscureText: true,
+                              obscureText: authController.loginPasswordVisibility.value,
                               cursorColor: AppColor.textColor,
                               controller: passController,
                               decoration: InputDecoration(
@@ -197,6 +197,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                   color: Color(0xFF747474),
                                   size: 18,
                                   weight: FontWeight.w500,
+                                ),
+                                suffixIcon: IconButton(
+                                    onPressed: (){
+                                      authController.loginPasswordVisibility.value = !authController.loginPasswordVisibility.value;
+                                    },
+                                    icon: Icon( authController.loginPasswordVisibility.value ? Icons.visibility : Icons.visibility_off,
+                                      color: Color(0xFF8D8D8D)
+                                      ,)
                                 ),
                               ),
                               validator: (password) =>

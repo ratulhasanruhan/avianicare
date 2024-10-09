@@ -56,10 +56,11 @@ class CustomFormField extends StatelessWidget {
             borderSide: const BorderSide(color: Color(0xFFCECECE)),
             borderRadius: BorderRadius.circular(10.r),
           ),
-          hintText: hintText ?? "",
-          hintStyle: GoogleFonts.roboto(
-              color: Color(0xFFCECECE),
-              fontSize: 16
+          label: Text(
+            hintText ?? '',
+          ),
+          labelStyle: GoogleFonts.roboto(
+              color: Color(0xFF5C5C5C),
           ),
         ),
         validator: validator,

@@ -43,6 +43,9 @@ class AuthController extends GetxController {
   String shippingMethod = '5';
   String currency = '\$';
 
+  RxBool loginPasswordVisibility = true.obs;
+  RxBool registerPasswordVisibility = true.obs;
+
   AppServer server = AppServer();
 
   static Future<BaseOptions> getBasseOptionsWithToken() async {

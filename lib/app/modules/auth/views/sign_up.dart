@@ -40,14 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     authController.getCountryCode();
   }
 
-  @override
-  void dispose() {
-    authController.nameController.dispose();
-    authController.emailController.dispose();
-    authController.passController.dispose();
-    authController.phoneController.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,157 +61,213 @@ class _SignUpScreenState extends State<SignUpScreen> {
               backgroundColor: AppColor.primaryBackgroundColor,
               body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        CustomText(
-                            text: "Sign Up".tr,
-                            color: AppColor.primaryColor,
-                            weight: FontWeight.w700,
-                            size: 26.sp),
-                        SizedBox(height: 12.h),
-                        CustomText(
-                            text: "Let's create your account".tr, size: 16.sp),
-                        SizedBox(height: 30.h),
-                        Form(
-                          key: formkey,
-                          child: Column(
-                            children: [
-                              FormFieldTitle(title: "Name".tr),
-                              SizedBox(height: 4.h),
-                              CustomFormField(
-                                controller: authController.nameController,
-                                validator: (name) =>
-                                    ValidationRules().normal(name),
-                              ),
-                              SizedBox(height: 20.h),
-                              const SwapFieldTitle(),
-                              SizedBox(height: 4.h),
-                              SwapFormField(
-                                emailController: authController.emailController,
-                                emailValidator: (email) =>
-                                    ValidationRules().email(email),
-                                phoneController: authController.phoneController,
-                                prefix: Padding(
-                                  padding: EdgeInsets.only(left: 10.w),
-                                  child: PopupMenuButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10.r),
-                                      ),
-                                    ),
-                                    position: PopupMenuPosition.under,
-                                    itemBuilder: (ctx) => List.generate(
-                                        authController
-                                            .countryCodeModel!.data!.length,
-                                        (index) => PopupMenuItem(
-                                              height: 32.h,
-                                              onTap: () async {
-                                                setState(() {
-                                                  authController.countryCode =
-                                                      authController
-                                                          .countryCodeModel!
-                                                          .data![index]
-                                                          .callingCode
-                                                          .toString();
-                                                });
-                                              },
-                                              child: Text(
-                                                authController.countryCodeModel!
-                                                    .data![index].callingCode
-                                                    .toString(),
-                                                style: GoogleFonts.urbanist(
-                                                    color: AppColor.textColor,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16.sp),
-                                              ),
-                                            )),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          authController.countryCode,
-                                          style: GoogleFonts.urbanist(
-                                              color: AppColor.textColor,
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        SvgPicture.asset(SvgIcon.down)
-                                      ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Sign Up".tr,
+                        style: GoogleFonts.roboto(
+                          fontSize: 30,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+                      CustomText(
+                          text: "Let's create your account".tr, size: 16.sp),
+                      SizedBox(height: 30.h),
+                      Form(
+                        key: formkey,
+                        child: Column(
+                          children: [
+                            const SwapFieldTitle(),
+                            SizedBox(height: 4.h),
+                            SwapFormField(
+                              emailController: authController.emailController,
+                              emailValidator: (email) =>
+                                  ValidationRules().email(email),
+                              phoneController: authController.phoneController,
+                              prefix: Padding(
+                                padding: EdgeInsets.only(left: 10.w),
+                                child: PopupMenuButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10.r),
                                     ),
                                   ),
+                                  position: PopupMenuPosition.under,
+                                  itemBuilder: (ctx) => List.generate(
+                                      authController
+                                          .countryCodeModel!.data!.length,
+                                      (index) => PopupMenuItem(
+                                            height: 32.h,
+                                            onTap: () async {
+                                              setState(() {
+                                                authController.countryCode =
+                                                    authController
+                                                        .countryCodeModel!
+                                                        .data![index]
+                                                        .callingCode
+                                                        .toString();
+                                              });
+                                            },
+                                            child: Text(
+                                              authController.countryCodeModel!
+                                                  .data![index].callingCode
+                                                  .toString(),
+                                              style: GoogleFonts.urbanist(
+                                                  color: AppColor.textColor,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16.sp),
+                                            ),
+                                          )),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        authController.countryCode,
+                                        style: GoogleFonts.urbanist(
+                                            color: AppColor.textColor,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      SvgPicture.asset(SvgIcon.down)
+                                    ],
+                                  ),
                                 ),
-                                phoneValidator: (phone) =>
-                                    ValidationRules().normal(phone),
                               ),
-                              SizedBox(height: 20.h),
-                              FormFieldTitle(title: "Password".tr),
-                              SizedBox(height: 4.h),
-                              CustomFormField(
-                                controller: authController.passController,
-                                obsecure: true,
-                                validator: (password) =>
-                                    ValidationRules().password(password),
+                              phoneValidator: (phone) =>
+                                  ValidationRules().normal(phone),
+                            ),
+                            SizedBox(height: 14.h),
+                            CustomFormField(
+                              controller: authController.nameController,
+                              hintText: "Name".tr,
+                              validator: (name) =>
+                                  ValidationRules().normal(name),
+                            ),
+                            SizedBox(height: 14.h),
+                            TextFormField(
+                              style: GoogleFonts.roboto(
+                                  color: AppColor.textColor,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16.sp),
+                              autovalidateMode:
+                              AutovalidateMode.onUserInteraction,
+                              obscureText: authController.registerPasswordVisibility.value,
+                              cursorColor: AppColor.textColor,
+                              controller: authController.passController,
+                              decoration: InputDecoration(
+                                prefix: SizedBox(
+                                  width: 10.w,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide:
+                                  const BorderSide(color: Color(0xFFCECECE)),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  const BorderSide(color: Color(0xFFCECECE)),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                  const BorderSide(color: Color(0xFFCECECE)),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                label: CustomText(
+                                  text: "Password".tr,
+                                  color: Color(0xFF747474),
+                                  size: 18,
+                                  weight: FontWeight.w500,
+                                ),
+                                suffixIcon: IconButton(
+                                    onPressed: (){
+                                      authController.registerPasswordVisibility.value = !authController.registerPasswordVisibility.value;
+                                    },
+                                    icon: Icon( authController.registerPasswordVisibility.value ? Icons.visibility : Icons.visibility_off,
+                                      color: Color(0xFF8D8D8D)
+                                      ,)
+                                ),
                               ),
-                              SizedBox(height: 24.h),
-                              PrimaryButton(
-                                  text: "Sign Up".tr,
-                                  onTap: () {
-                                    if (formkey.currentState!.validate()) {
-                                      swapController.isShowEmailField.value
-                                          ? authController
-                                              .registrationValidationWithEmail(
-                                              name: authController
-                                                  .nameController.text,
-                                              email: authController
-                                                  .emailController.text,
-                                              password: authController
-                                                  .passController.text,
-                                            )
-                                          : authController
-                                              .registrationValidationWithPhone(
-                                                  name: authController
-                                                      .nameController.text,
-                                                  phone: authController
-                                                      .phoneController.text,
-                                                  countryCode: authController
-                                                      .countryCode,
-                                                  password: authController
-                                                      .passController.text);
-                                    } else {
-                                      debugPrint("Something is wrong.");
-                                    }
-                                  }),
-                              SizedBox(height: 20.h),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              validator: (password) =>
+                                  ValidationRules().password(password),
+                            ),
+                            SizedBox(height: 20.h),
+                            PrimaryButton(
+                                text: "Sign Up".tr,
+                                onTap: () {
+                                  if (formkey.currentState!.validate()) {
+                                    swapController.isShowEmailField.value
+                                        ? authController
+                                            .registrationValidationWithEmail(
+                                            name: authController
+                                                .nameController.text,
+                                            email: authController
+                                                .emailController.text,
+                                            password: authController
+                                                .passController.text,
+                                          )
+                                        : authController
+                                            .registrationValidationWithPhone(
+                                                name: authController
+                                                    .nameController.text,
+                                                phone: authController
+                                                    .phoneController.text,
+                                                countryCode: authController
+                                                    .countryCode,
+                                                password: authController
+                                                    .passController.text);
+                                  } else {
+                                    debugPrint("Something is wrong.");
+                                  }
+                                }),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                      text: "Already have an account?".tr,
-                                      color: const Color(0xFF6E7191),
-                                      size: 16.sp,
-                                      weight: FontWeight.w500),
-                                  SizedBox(width: 4.w),
-                                  GestureDetector(
+                                    text: "Already have account?",
+                                    color: const Color(0xFF575353),
+                                    size: 16,
+                                  ),
+                                  InkWell(
                                     onTap: () {
                                       Get.to(() => const SignInScreen());
                                     },
-                                    child: CustomText(
-                                        text: "Sign In".tr,
-                                        size: 16.sp,
-                                        color: AppColor.primaryColor,
-                                        weight: FontWeight.w600),
+                                    child: Text(
+                                      "Log In",
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 16,
+                                        color: Color(0xFF010101),
+                                        fontWeight: FontWeight.w500,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
                                   ),
                                 ],
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      Image.asset(
+                        'assets/images/dog.png',
+                        height: 220.h,
+                        width: MediaQuery.of(context).size.width,
+                      )
+                    ],
                   ),
                 ),
               ),
