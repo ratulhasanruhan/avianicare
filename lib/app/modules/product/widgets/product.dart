@@ -1,3 +1,4 @@
+import 'package:avianicare/utils/calculatePercentage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -8,6 +9,7 @@ import 'package:avianicare/widgets/textwidget.dart';
 
 import '../../../../config/theme/app_color.dart';
 import '../../../../utils/svg_icon.dart';
+import '../../cart/controller/cart_controller.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -137,7 +139,70 @@ class ProductWidget extends StatelessWidget {
                             ),
                     ],
                   ),
-                )
+                ),
+                Positioned(
+                  left: 6.w,
+                  right: 6.w,
+                  bottom: 6.h,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
+                        decoration: BoxDecoration(
+                          color: AppColor.whiteColor,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.star,
+                              color: AppColor.yellowColor,
+                              size: 12.sp,
+                            ),
+                            SizedBox(
+                              width: 4.w,
+                            ),
+                            TextWidget(
+                              text: rating ?? '0',
+                              color: AppColor.textColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            TextWidget(
+                              text: " (${reviews ?? '0'})",
+                              color: Color(0xFF989898),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        ),
+
+                      ),
+                      InkWell(
+                              onTap: (){
+
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: AppColor.whiteColor,
+                                  borderRadius: BorderRadius.circular(6.r),
+                                ),
+                                child: Center(
+                                  child: SvgPicture.asset(
+                                    'assets/images/cart.svg',
+                                    height: 18,
+                                    width: 18,
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
               ],
             ),
             SizedBox(
@@ -158,43 +223,19 @@ class ProductWidget extends StatelessWidget {
                       overflow: TextOverflow.fade,
                     ),
                   ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  RatingBarIndicator(
-                    rating: double.parse(rating.toString() == 'null'
-                        ? '0'
-                        : (double.parse(rating.toString()) / textRating!.toInt())
-                            .toString()),
-                    itemSize: 10.h,
-                    unratedColor: AppColor.inactiveColor,
-                    itemBuilder: (context, index) => Container(
-                      margin: EdgeInsets.symmetric(horizontal: 1.w),
-                      child: SvgPicture.asset(
-                        SvgIcon.star,
-                        colorFilter: const ColorFilter.mode(
-                            AppColor.yellowColor, BlendMode.srcIn),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                  TextWidget(
-                    text:
-                        "${rating.toString() == 'null' ? '0' : double.parse(rating.toString()) / textRating!.toInt()} (${textRating ?? 0} ${' Reviews'.tr})",
-                    color: AppColor.textColor1,
-                    fontSize: 9.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+
                   SizedBox(
                     height: 12.h,
                   ),
                   FittedBox(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         TextWidget(
                           text: discountPrice ?? '0',
                           color: AppColor.textColor,
-                          fontSize: 18.sp,
+                          fontSize: 18,
                           fontWeight: FontWeight.w700,
                         ),
                         SizedBox(
@@ -203,11 +244,30 @@ class ProductWidget extends StatelessWidget {
                         isOffer == true
                             ? TextWidget(
                                 text: currentPrice ?? '0',
-                                color: AppColor.redColor,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
+                                color: Color(0xFFA9A9A9),
+                                fontSize: 12,
                                 decoration: TextDecoration.lineThrough,
                               )
+                            : const SizedBox(),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        isOffer == true
+                            ? Stack(
+                          alignment: Alignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                    'assets/images/discounts.svg',
+                                  ),
+                                TextWidget(
+                                  text: "${calculateDiscountPercentage(currentPrice?.replaceAll('৳', ''), discountPrice?.replaceAll('৳', ''))}%",
+                                  color: AppColor.whiteColor,
+                                  fontSize: 11,
+                                  textAlign: TextAlign.center,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ],
+                            )
                             : const SizedBox(),
                       ],
                     ),
