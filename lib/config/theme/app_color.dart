@@ -4,6 +4,8 @@ class AppColor {
   static const Color primaryColor = Color(0xff479B76);
   static const Color favColor = Color(0xFFFFFFFF);
   static const Color primaryColor1 = Color(0xffFFF4F1);
+  static const Color unSelectedColor = Color(0xff434343);
+  static const Color selectedColor = Color(0xff13A464);
   static const Color primaryBackgroundColor = Color(0xffFFFFFF);
   static const Color secondaryBackgroundColor = Color(0xffE9FDF6);
   static const Color titleTextColor = Color(0xff1F1F39);

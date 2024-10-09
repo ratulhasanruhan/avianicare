@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -20,32 +22,60 @@ import 'package:avianicare/main.dart';
 import 'package:avianicare/utils/svg_icon.dart';
 import '../../../../config/theme/app_color.dart';
 
-class NavBarView extends StatelessWidget {
+class NavBarView extends StatefulWidget {
   const NavBarView({super.key});
 
   @override
+  State<NavBarView> createState() => _NavBarViewState();
+}
+
+class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateMixin{
+  late TabController tabController;
+
+  final navController = Get.put(NavbarController());
+  GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey();
+  final CartController cartController = Get.put(CartController());
+  NotificationHelper notificationHelper = NotificationHelper();
+
+  DeviceToken deviceToken = DeviceToken();
+
+  List<Widget> screens = [
+    const HomeScreen(),
+    CartScreen(),
+    ProfileScreen()
+  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+    tabController.animation!.addListener(
+          () {
+        final value = tabController.animation!.value.round();
+        if (value != navController.selectedIndex.value && mounted) {
+          setState(() {
+            navController.selectedIndex.value = value;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    NotificationHelper notificationHelper = NotificationHelper();
-
-    DeviceToken deviceToken = DeviceToken();
-
     notificationHelper.notificationPermission();
 
     if (box.read('isLogedIn') != false) {
       deviceToken.getDeviceToken();
     }
-
-    final navController = Get.put(NavbarController());
-    GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey();
-    final CartController cartController = Get.put(CartController());
-
-    List<Widget> screens = [
-      const HomeScreen(),
-      const CategoryScreen(),
-      CartScreen(),
-      const WishlistScreen(),
-      const ProfileScreen()
-    ];
 
     return WillPopScope(
       onWillPop: () async {
@@ -84,6 +114,126 @@ class NavBarView extends StatelessWidget {
           statusBarBrightness: Brightness.dark,
         ),
         child: Scaffold(
+          key: scaffoldKey,
+          body: Obx( () {
+            var currentPage = navController.selectedIndex.value;
+
+            return BottomBar(
+                fit: StackFit.expand,
+                icon: (width, height) => Center(
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: null,
+                    icon: Icon(
+                      Icons.arrow_upward_rounded,
+                      color: AppColor.unSelectedColor,
+                      size: width,
+                    ),
+                  ),
+                ),
+                borderRadius: BorderRadius.circular(500),
+                duration: Duration(seconds: 1),
+                curve: Curves.decelerate,
+                showIcon: true,
+                width: MediaQuery.of(context).size.width * 0.8,
+                barColor: Colors.white,
+                start: 2,
+                end: 0,
+                offset: 10,
+                barAlignment: Alignment.bottomCenter,
+                iconHeight: 35,
+                iconWidth: 35,
+                reverse: false,
+                hideOnScroll: true,
+                scrollOpposite: false,
+                onBottomBarHidden: () {},
+                onBottomBarShown: () {},
+                body: (context, controller) => TabBarView(
+                  controller: tabController,
+                  dragStartBehavior: DragStartBehavior.down,
+                  physics: const BouncingScrollPhysics(),
+                  children: screens,
+                ),
+                child: TabBar(
+                  controller: tabController,
+                  indicator: BoxDecoration(),
+                  tabs: [
+                    SizedBox(
+                      height: 55,
+                      width: 40,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/home.svg',
+                            color: currentPage == 0 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            'Home',
+                            style: TextStyle(
+                              color: currentPage == 0 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 55,
+                      width: 50,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/cart.svg',
+                            color: currentPage == 1 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            'My Cart',
+                            style: TextStyle(
+                              color: currentPage == 1 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 55,
+                      width: 55,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/profile.svg',
+                            color: currentPage == 2 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            'Account',
+                            style: TextStyle(
+                              color: currentPage == 2 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          ),
+        ),
+/*        child: Scaffold(
           key: scaffoldKey,
           extendBody: true,
           floatingActionButton: Container(
@@ -207,7 +357,7 @@ class NavBarView extends StatelessWidget {
           body: Obx(() {
             return screens[navController.selectedIndex.value];
           }),
-        ),
+        ),*/
       ),
     );
   }

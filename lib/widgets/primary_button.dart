@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../config/theme/app_color.dart';
+import '../utils/constant.dart';
 import 'custom_text.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -9,7 +11,7 @@ class PrimaryButton extends StatelessWidget {
     super.key,
     this.onTap,
     required this.text,
-    this.height = 48,
+    this.height = 52,
     this.width = 328,
   });
 
@@ -20,23 +22,30 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Material(
-        child: Ink(
-          height: height?.h,
-          width: width?.w,
-          decoration: BoxDecoration(
-            color: AppColor.primaryColor,
-            borderRadius: BorderRadius.circular(24.r),
+    return Container(
+      height: height!.h,
+      width: width!.w,
+      decoration: BoxDecoration(
+        gradient: buttonGradient,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          minimumSize: Size(height!.h, width!.w),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-          child: Center(
-              child: CustomText(
-            text: text,
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 20,
             color: Colors.white,
-            weight: FontWeight.w700,
-            size: 16.sp,
-          )),
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );

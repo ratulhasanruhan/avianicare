@@ -12,6 +12,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:avianicare/data/helper/notification_helper.dart';
 import 'package:avianicare/data/model/body/notification_body.dart';
 import 'package:avianicare/firebase_options.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -63,7 +64,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             translations: Languages(),
             locale: langValue,
-            theme: ThemeData(useMaterial3: false),
+            theme: ThemeData(
+              useMaterial3: false,
+              fontFamily: GoogleFonts.roboto().fontFamily,
+            ),
             initialRoute: AppPages.initial,
             getPages: AppPages.pages,
           )),

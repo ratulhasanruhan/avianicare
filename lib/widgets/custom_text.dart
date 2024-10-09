@@ -25,7 +25,7 @@ class CustomText extends StatelessWidget {
     return Text(
       text ?? "",
       textAlign: textAlign,
-      style: GoogleFonts.urbanist(
+      style: GoogleFonts.roboto(
         fontSize: size,
         color: color,
         fontWeight: weight,

@@ -12,7 +12,8 @@ class CustomFormField extends StatelessWidget {
       this.keyboardType,
       this.onTap,
       this.suffixIcon,
-      this.isSuffixIcon = false, this.enabled});
+      this.isSuffixIcon = false, this.enabled,
+        this.hintText});
 
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -22,12 +23,13 @@ class CustomFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool isSuffixIcon;
   final bool? enabled;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: TextFormField(
-        style: GoogleFonts.urbanist(
+        style: GoogleFonts.roboto(
             color: AppColor.textColor,
             fontWeight: FontWeight.w500,
             fontSize: 16.sp),
@@ -38,27 +40,27 @@ class CustomFormField extends StatelessWidget {
         keyboardType: keyboardType,
         enabled: enabled,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.zero,
           suffixIcon: isSuffixIcon ? suffixIcon : const SizedBox(),
           prefix: SizedBox(
             width: 10.w,
           ),
           border: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: Color(0xFFCECECE)),
+            borderRadius: BorderRadius.circular(10.r),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: Color(0xFFCECECE)),
+            borderRadius: BorderRadius.circular(10.r),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: Color(0xFFCECECE)),
+            borderRadius: BorderRadius.circular(10.r),
           ),
-          hintStyle: GoogleFonts.urbanist(
-              color: AppColor.textColor,
-              fontWeight: FontWeight.w500,
-              fontSize: 16.sp),
+          hintText: hintText ?? "",
+          hintStyle: GoogleFonts.roboto(
+              color: Color(0xFFCECECE),
+              fontSize: 16
+          ),
         ),
         validator: validator,
       ),

@@ -31,6 +31,7 @@ class SwapFormField extends StatelessWidget {
             ? CustomFormField(
                 controller: emailController,
                 validator: emailValidator,
+                hintText: 'abc@gmail.com',
               )
             : CustomPhoneFormField(
                 phoneController: phoneController,

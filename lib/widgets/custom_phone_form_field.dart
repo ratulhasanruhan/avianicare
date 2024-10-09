@@ -31,27 +31,25 @@ class _CustomPhoneFormField extends State<CustomPhoneFormField> {
         cursorColor: AppColor.textColor,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.zero,
           prefixIcon: SizedBox(
             width: 85.w,
             child: widget.prefix,
           ),
           border: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: Color(0xFFCECECE)),
+            borderRadius: BorderRadius.circular(10.r),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: Color(0xFFCECECE)),
+            borderRadius: BorderRadius.circular(10.r),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: Color(0xFFCECECE)),
+            borderRadius: BorderRadius.circular(10.r),
           ),
-          hintStyle: GoogleFonts.urbanist(
-              color: AppColor.textColor,
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500),
+          hintText: "17XXXXXXXX",
+          hintStyle: GoogleFonts.roboto(
+              color: Color(0xFFCECECE)),
         ),
         validator: widget.validator,
       ),

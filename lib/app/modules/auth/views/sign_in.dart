@@ -40,7 +40,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final formkey = GlobalKey<FormState>();
 
-  bool mark = false;
+  bool mark = true;
 
   @override
   void initState() {
@@ -54,14 +54,6 @@ class _SignInScreenState extends State<SignInScreen> {
         box.read('password') == null ? '' : box.read('password').toString();
     phoneController.text =
         box.read('phone') == null ? '' : box.read('phone').toString();
-    if (box.read('email') != null ||
-        box.read('password') != null ||
-        box.read('country_code') != null ||
-        box.read('phone') != null) {
-      mark = true;
-    } else {
-      mark = false;
-    }
   }
 
   @override
@@ -92,205 +84,225 @@ class _SignInScreenState extends State<SignInScreen> {
               backgroundColor: AppColor.primaryBackgroundColor,
               body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          text: "Sing In".tr,
-                          color: AppColor.primaryColor,
-                          size: 26.sp,
-                          weight: FontWeight.w700,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Sign In".tr,
+                        style: GoogleFonts.roboto(
+                          fontSize: 30,
+                          color: Colors.black,
                         ),
-                        SizedBox(height: 12.h),
-                        CustomText(
-                            text: "Sign in to continue shopping".tr,
-                            size: 16.sp),
-                        SizedBox(height: 30.h),
-                        Form(
-                          key: formkey,
-                          child: Column(
-                            children: [
-                              const SwapFieldTitle(),
-                              SizedBox(height: 4.h),
-                              SwapFormField(
-                                emailController: emailController,
-                                emailValidator: (email) =>
-                                    ValidationRules().email(email),
-                                phoneController: phoneController,
-                                prefix: Padding(
-                                  padding: EdgeInsets.only(left: 10.w),
-                                  child: PopupMenuButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10.r),
+                      ),
+                      SizedBox(height: 20.h),
+                      Form(
+                        key: formkey,
+                        child: Column(
+                          children: [
+                            const SwapFieldTitle(),
+                            SizedBox(height: 4.h),
+                            SwapFormField(
+                              emailController: emailController,
+                              emailValidator: (email) =>
+                                  ValidationRules().email(email),
+                              phoneController: phoneController,
+                              prefix: Padding(
+                                padding: EdgeInsets.only(left: 10.w),
+                                child: PopupMenuButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10.r),
+                                    ),
+                                  ),
+                                  position: PopupMenuPosition.under,
+                                  itemBuilder: (ctx) => List.generate(
+                                      authController
+                                          .countryCodeModel!.data!.length,
+                                      (index) => PopupMenuItem(
+                                            height: 32.h,
+                                            onTap: () async {
+                                              setState(() {
+                                                authController.countryCode =
+                                                    authController
+                                                        .countryCodeModel!
+                                                        .data![index]
+                                                        .callingCode
+                                                        .toString();
+                                              });
+                                            },
+                                            child: Text(
+                                              authController.countryCodeModel!
+                                                  .data![index].callingCode
+                                                  .toString(),
+                                              style: GoogleFonts.urbanist(
+                                                  color: AppColor.textColor,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16.sp),
+                                            ),
+                                          )),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        authController.countryCode,
+                                        style: GoogleFonts.urbanist(
+                                            color: AppColor.textColor,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w500),
                                       ),
-                                    ),
-                                    position: PopupMenuPosition.under,
-                                    itemBuilder: (ctx) => List.generate(
-                                        authController
-                                            .countryCodeModel!.data!.length,
-                                        (index) => PopupMenuItem(
-                                              height: 32.h,
-                                              onTap: () async {
-                                                setState(() {
-                                                  authController.countryCode =
-                                                      authController
-                                                          .countryCodeModel!
-                                                          .data![index]
-                                                          .callingCode
-                                                          .toString();
-                                                });
-                                              },
-                                              child: Text(
-                                                authController.countryCodeModel!
-                                                    .data![index].callingCode
-                                                    .toString(),
-                                                style: GoogleFonts.urbanist(
-                                                    color: AppColor.textColor,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16.sp),
-                                              ),
-                                            )),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          authController.countryCode,
-                                          style: GoogleFonts.urbanist(
-                                              color: AppColor.textColor,
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        SvgPicture.asset(SvgIcon.down)
-                                      ],
-                                    ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      SvgPicture.asset(SvgIcon.down)
+                                    ],
                                   ),
                                 ),
-                                phoneValidator: (phone) =>
-                                    ValidationRules().normal(phone),
                               ),
-                              SizedBox(height: 20.h),
-                              FormFieldTitle(title: "Password".tr),
-                              SizedBox(height: 4.h),
-                              CustomFormField(
-                                obsecure: true,
-                                controller: passController,
-                                validator: (password) =>
-                                    ValidationRules().password(password),
+                              phoneValidator: (phone) =>
+                                  ValidationRules().normal(phone),
+                            ),
+                            SizedBox(height: 16.h),
+                            TextFormField(
+                              style: GoogleFonts.roboto(
+                                  color: AppColor.textColor,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16.sp),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              obscureText: true,
+                              cursorColor: AppColor.textColor,
+                              controller: passController,
+                              decoration: InputDecoration(
+                                prefix: SizedBox(
+                                  width: 10.w,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Color(0xFFCECECE)),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Color(0xFFCECECE)),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Color(0xFFCECECE)),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                label: CustomText(
+                                  text: "Password".tr,
+                                  color: Color(0xFF747474),
+                                  size: 18,
+                                  weight: FontWeight.w500,
+                                ),
                               ),
-                              SizedBox(height: 12.h),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        mark = !mark;
-                                      });
-                                    },
-                                    child: SvgPicture.asset(
-                                        mark == true
-                                            ? SvgIcon.checkdBox
-                                            : SvgIcon.checkBox,
-                                        height: 16.h,
-                                        width: 16.w),
-                                  ),
-                                  SizedBox(width: 8.w),
-                                  CustomText(
-                                      text: "Remember me".tr,
-                                      size: 14.sp,
-                                      weight: FontWeight.w400),
-                                  const Spacer(),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.to(
+                              validator: (password) =>
+                                  ValidationRules().password(password),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: TextButton(
+                                onPressed: () {
+                                  Get.to(
                                           () => const ForgotPasswordScreen());
-                                    },
-                                    child: CustomText(
-                                      text: "Forgot Password".tr,
-                                      color: AppColor.primaryColor,
-                                      weight: FontWeight.w600,
-                                      size: 14.sp,
-                                    ),
-                                  ),
-                                ],
+                                },
+                                child: Text(
+                                  "Forgot Password?".tr,
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    color: Color(0xFF575353),
+                                ),
+                                ),
                               ),
-                              SizedBox(height: 24.h),
-                              PrimaryButton(
-                                  text: "Sign In".tr,
-                                  onTap: () {
-                                    if (formkey.currentState!.validate()) {
-                                      if (swapController
-                                          .isShowEmailField.value) {
-                                        if (mark == true) {
-                                          box.write(
-                                              'email', emailController.text);
-                                          box.write(
-                                              'password', passController.text);
-                                        } else if (mark == false) {
-                                          box.remove('email');
-                                          box.remove('password');
-                                        }
-                                      } else {
-                                        if (mark == true) {
-                                          box.write(
-                                              'phone', phoneController.text);
-                                          box.write('country_code',
-                                              authController.countryCode);
-                                          box.write(
-                                              'password', passController.text);
-                                        } else if (mark == false) {
-                                          box.remove('phone');
-                                          box.remove('country_code');
-                                          box.remove('password');
-                                        }
+                            ),
+                            PrimaryButton(
+                                text: "Sign In".tr,
+                                onTap: () {
+                                  if (formkey.currentState!.validate()) {
+                                    if (swapController
+                                        .isShowEmailField.value) {
+                                      if (mark == true) {
+                                        box.write(
+                                            'email', emailController.text);
+                                        box.write(
+                                            'password', passController.text);
+                                      } else if (mark == false) {
+                                        box.remove('email');
+                                        box.remove('password');
                                       }
-                                      swapController.isShowEmailField.value
-                                          ? authController.signInWithEmail(
-                                              email: emailController.text,
-                                              password: passController.text)
-                                          : authController.signInWithPhone(
-                                              phone: phoneController.text,
-                                              countryCode:
-                                                  authController.countryCode,
-                                              password: passController.text);
                                     } else {
-                                      debugPrint("Login is failed");
+                                      if (mark == true) {
+                                        box.write(
+                                            'phone', phoneController.text);
+                                        box.write('country_code',
+                                            authController.countryCode);
+                                        box.write(
+                                            'password', passController.text);
+                                      } else if (mark == false) {
+                                        box.remove('phone');
+                                        box.remove('country_code');
+                                        box.remove('password');
+                                      }
                                     }
-                                  }),
-                              SizedBox(height: 20.h),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                    swapController.isShowEmailField.value
+                                        ? authController.signInWithEmail(
+                                            email: emailController.text,
+                                            password: passController.text)
+                                        : authController.signInWithPhone(
+                                            phone: phoneController.text,
+                                            countryCode:
+                                                authController.countryCode,
+                                            password: passController.text);
+                                  } else {
+                                    debugPrint("Login is failed");
+                                  }
+                                }),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomText(
-                                      text: "Don't have an account?".tr,
-                                      color: const Color(0xFF6E7191),
-                                      size: 16.sp,
-                                      weight: FontWeight.w500),
-                                  SizedBox(width: 4.w),
-                                  GestureDetector(
+                                      text: "New User?",
+                                      color: const Color(0xFF575353),
+                                      size: 16,
+                                  ),
+                                  InkWell(
                                     onTap: () {
                                       Get.to(() => const SignUpScreen());
                                     },
-                                    child: CustomText(
-                                        text: "Sign Up".tr,
-                                        color: AppColor.primaryColor,
-                                        size: 16.sp,
-                                        weight: FontWeight.w700),
+                                    child: Text(
+                                      "Create an Account",
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 16,
+                                        color: Color(0xFF010101),
+                                        fontWeight: FontWeight.w500,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
                                   ),
                                 ],
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
-                        SizedBox(height: 200.h),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      Image.asset(
+                        'assets/images/dog.png',
+                        height: 300.h,
+                        width: MediaQuery.of(context).size.width,
+                      )
+                    ],
                   ),
                 ),
               ),
