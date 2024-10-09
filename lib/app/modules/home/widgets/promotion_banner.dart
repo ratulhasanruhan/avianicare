@@ -52,16 +52,16 @@ class PromotionBanner extends StatelessWidget {
                                 promotion: promotion[index]));
                           },
                           child: Padding(
-                            padding: EdgeInsets.only(right: 16.w),
+                            padding: EdgeInsets.only(right: 8.w),
                             child: Container(
                               width: promotion![index].status == 10
                                   ? 280.w
                                   : 240.w,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.r),
+                                borderRadius: BorderRadius.circular(15.r),
                               ),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.r),
+                                borderRadius: BorderRadius.circular(15.r),
                                 child: Image.network(
                                   promotion[index].cover.toString(),
                                   fit: BoxFit.cover,

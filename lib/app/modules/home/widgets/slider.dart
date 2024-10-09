@@ -16,33 +16,36 @@ class SliderWidget extends StatelessWidget {
     final sliderController = Get.find<SliderController>();
 
     return Container(
-      height: 142.h,
+      height: 170.h,
       width: 328.w,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r)),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
+      child: Column(
         children: [
           Obx(() {
             return CarouselSlider.builder(
               itemCount: sliderController.sliderData.value.data!.length,
               itemBuilder: (context, index, _) {
                 final data = sliderController.sliderData.value.data!;
-                return CachedNetworkImage(
-                  imageUrl: data[index].image.toString(),
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      image: DecorationImage(
-                          image: imageProvider, fit: BoxFit.fill),
+                return Padding(
+                  padding: const EdgeInsets.only(left: 6),
+                  child: CachedNetworkImage(
+                    imageUrl: data[index].image.toString(),
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.cover),
+                      ),
                     ),
                   ),
                 );
               },
               options: CarouselOptions(
-                height: 142.h,
-                viewportFraction: 1,
+                height: 155.h,
+                viewportFraction: 0.9,
                 autoPlay: true,
-                enlargeCenterPage: true,
+                padEnds: false,
+                enlargeCenterPage: false,
                 disableCenter: true,
                 onPageChanged: (index, reason) {
                   sliderController.handleSliderDots(index);
@@ -50,23 +53,23 @@ class SliderWidget extends StatelessWidget {
               ),
             );
           }),
-          Positioned(
-            bottom: 10,
-            child: Obx(() {
-              return DotsIndicator(
-                dotsCount: sliderController.sliderData.value.data!.length,
-                position: sliderController.dotIndex.value,
-                decorator: DotsDecorator(
-                  spacing: EdgeInsets.only(left: 5.w),
-                  shape: const CircleBorder(
-                      side: BorderSide(color: AppColor.primaryColor),
-                      eccentricity: 0.8),
-                  color: Colors.transparent,
-                  activeColor: AppColor.primaryColor,
-                ),
-              );
-            }),
-          )
+          SizedBox(
+            height: 6,
+          ),
+          Obx(() {
+            return DotsIndicator(
+              dotsCount: sliderController.sliderData.value.data!.length,
+              position: sliderController.dotIndex.value,
+              decorator: DotsDecorator(
+                spacing: EdgeInsets.only(left: 5.w),
+                size: const Size(7, 8),
+                activeSize: const Size(30, 6),
+                activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                color: Colors.black.withOpacity(0.2),
+                activeColor: Colors.black.withOpacity(0.5)
+              ),
+            );
+          })
         ],
       ),
     );

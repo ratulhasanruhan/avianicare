@@ -15,7 +15,7 @@ class CategoryWidget extends StatelessWidget {
     final categoryController = Get.find<CategoryController>();
 
     return Container(
-      height: 120.h,
+      height: 150.h,
       width: double.infinity,
       color: AppColor.whiteColor, // white hobe
       child: Obx(() {
@@ -26,71 +26,46 @@ class CategoryWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             final category = categoryController.categoryModel.value.data!;
             return Center(
-              child: Padding(
-                padding: EdgeInsets.only(right: 12.w),
-                child: InkWell(
-                  onTap: () {
-                    Get.to(
-                      () => CategoryWiseProductScreen(
-                          categoryModel: category[index]),
-                    );
-                  },
-                  child: Container(
-                    height: 85.h,
-                    width: 72.w,
-                    decoration: BoxDecoration(
-                      color: AppColor.whiteColor,
-                      borderRadius: BorderRadius.circular(8.r),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.04),
-                            offset: const Offset(0, 0),
-                            blurRadius: 32.r,
-                            spreadRadius: 0)
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: category[index].thumb.toString(),
-                          imageBuilder: (context, imageProvider) => Container(
-                            height: 50.h,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(8.r),
-                                  topRight: Radius.circular(8.r)),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
+              child: InkWell(
+                onTap: () {
+                  Get.to(
+                    () => CategoryWiseProductScreen(
+                        categoryModel: category[index]),
+                  );
+                },
+                child: SizedBox(
+                  height: 140.h,
+                  width: 100.w,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl: category[index].thumb.toString(),
+                        imageBuilder: (context, imageProvider) => Container(
+                          height: 100.h,
+                          width: 93.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Container(
-                            height: 22.h,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: AppColor.whiteColor,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(8.r),
-                                bottomRight: Radius.circular(8.r),
-                              ),
-                            ),
-                            child: Center(
-                              child: TextWidget(
-                                text: category[index].name,
-                                textAlign: TextAlign.center,
-                                color: AppColor.titleTextColor,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextWidget(
+                          text: category[index].name,
+                          textAlign: TextAlign.start,
+                          color: Color(0xFF464646),
+                          fontSize: 14,
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),

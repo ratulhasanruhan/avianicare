@@ -27,7 +27,7 @@ class TextWidget extends StatelessWidget {
     return Text(
       '$text',
       textAlign: textAlign,
-      style: GoogleFonts.urbanist(
+      style: GoogleFonts.roboto(
           color: color,
           fontWeight: fontWeight,
           fontSize: fontSize,

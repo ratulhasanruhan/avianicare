@@ -30,7 +30,6 @@ class NavBarView extends StatefulWidget {
 }
 
 class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateMixin{
-  late TabController tabController;
 
   final navController = Get.put(NavbarController());
   GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey();
@@ -49,10 +48,10 @@ class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateM
   void initState() {
     // TODO: implement initState
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
-    tabController.animation!.addListener(
+    navController.tabController = TabController(length: 3, vsync: this);
+    navController.tabController.animation!.addListener(
           () {
-        final value = tabController.animation!.value.round();
+        final value = navController.tabController.animation!.value.round();
         if (value != navController.selectedIndex.value && mounted) {
           setState(() {
             navController.selectedIndex.value = value;
@@ -64,7 +63,7 @@ class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateM
 
   @override
   void dispose() {
-    tabController.dispose();
+    navController.tabController.dispose();
     super.dispose();
   }
 
@@ -137,6 +136,17 @@ class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateM
                 showIcon: true,
                 width: MediaQuery.of(context).size.width * 0.8,
                 barColor: Colors.white,
+                barDecoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(500),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 20,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
                 start: 2,
                 end: 0,
                 offset: 10,
@@ -149,13 +159,13 @@ class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateM
                 onBottomBarHidden: () {},
                 onBottomBarShown: () {},
                 body: (context, controller) => TabBarView(
-                  controller: tabController,
+                  controller: navController.tabController,
                   dragStartBehavior: DragStartBehavior.down,
                   physics: const BouncingScrollPhysics(),
                   children: screens,
                 ),
                 child: TabBar(
-                  controller: tabController,
+                  controller: navController.tabController,
                   indicator: BoxDecoration(),
                   tabs: [
                     SizedBox(

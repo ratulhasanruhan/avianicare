@@ -42,7 +42,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
         backgroundColor: AppColor.primaryBackgroundColor,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(48.h),
-          child: const AppBarWidget(isSearch: false),
+          child: AppBarWidget(isSearch: false),
         ),
         body: Padding(
           padding: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),

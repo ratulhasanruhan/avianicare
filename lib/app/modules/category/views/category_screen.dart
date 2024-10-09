@@ -29,7 +29,7 @@ class CategoryScreen extends StatelessWidget {
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(48.h),
-            child: const AppBarWidget(isSearch: false)),
+            child:  AppBarWidget(isSearch: false)),
         body: Obx(
           () => Stack(
             alignment: Alignment.center,

@@ -1,8 +1,10 @@
+import 'package:avianicare/app/modules/category/views/category_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:avianicare/app/modules/auth/controller/auth_controler.dart';
@@ -33,6 +35,9 @@ import 'package:avianicare/widgets/shimmer/slider_shimmer.dart';
 import 'package:avianicare/widgets/title.dart';
 import '../../../../config/theme/app_color.dart';
 import '../../../../widgets/appbar.dart';
+import '../../cart/controller/cart_controller.dart';
+import '../../cart/views/cart_screen.dart';
+import '../../navbar/controller/navbar_controller.dart';
 import '../../product/views/product_list_screen.dart';
 import '../../wishlist/controller/wishlist_controller.dart';
 import '../../search/views/search_screen.dart';
@@ -55,6 +60,7 @@ class HomeScreen extends StatelessWidget {
     final wishListController = Get.put(WishlistController());
     final brandController = Get.put(BrandController());
     final popularProductController = Get.put(PopularProductController());
+    final nabarController = Get.put(NavbarController());
     categoryController.fetchCategory();
     productSectionController.fetchProductSection();
 
@@ -88,7 +94,8 @@ class HomeScreen extends StatelessWidget {
               isSearch: true,
               svgIcon: SvgIcon.search,
               onTap: () {
-                Get.to(() => const SearchScreen());
+                nabarController.tabController.animateTo(1);
+                nabarController.selectPage(1);
               }),
         ),
         body: RefreshIndicator(
@@ -130,19 +137,36 @@ class HomeScreen extends StatelessWidget {
                                   : const SizedBox();
                         }),
                       ),
-                      SizedBox(height: 24.h),
+                      SizedBox(height: 15.h),
                       Obx(() {
                         return categoryController
                                     .categoryModel.value.data?.isNotEmpty ??
                                 false
                             ? Padding(
                                 padding: EdgeInsets.only(right: 16.w),
-                                child: TitleWidget(
-                                  text: 'CATEGORIES'.tr,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TitleWidget(
+                                      text: "Find by Category",
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(() => const CategoryScreen());
+                                      },
+                                      child: SvgPicture.asset(
+                                        'assets/icons/right_arrow.svg',
+                                        color: AppColor.primaryColor,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               )
                             : const SizedBox();
                       }),
+                      SizedBox(
+                        height: 5.h,
+                      ),
                       Obx(() {
                         return categoryController.categoryModel.value.data ==
                                 null

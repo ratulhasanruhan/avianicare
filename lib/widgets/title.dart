@@ -13,10 +13,10 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$text',
-      style: GoogleFonts.urbanist(
+      style: GoogleFonts.roboto(
           color: AppColor.titleTextColor,
-          fontWeight: FontWeight.w700,
-          fontSize: 22.sp),
+          fontWeight: FontWeight.w500,
+          fontSize: 20.sp),
     );
   }
 }
