@@ -65,18 +65,21 @@ class AppBarWidget extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Color(0xFF77B56D),
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Color(0xFF77B56D),
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
           border: OutlineInputBorder(
             borderSide: BorderSide(
               color: Color(0xFF77B56D),
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
