@@ -10,6 +10,7 @@ import 'package:avianicare/widgets/textwidget.dart';
 import '../../../../config/theme/app_color.dart';
 import '../../../../utils/svg_icon.dart';
 import '../../cart/controller/cart_controller.dart';
+import '../../product_details/controller/product_details_controller.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -182,6 +183,7 @@ class ProductWidget extends StatelessWidget {
                       ),
                       InkWell(
                               onTap: (){
+                                final productDetailsController = Get.put(ProductDetailsController());
 
                               },
                               child: Container(

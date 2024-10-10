@@ -3,7 +3,7 @@ class SvgIcon {
   static const bangladesh = "assets/icons/bangladesh.svg";
   static const checkBox = "assets/icons/check.svg";
   static const checkdBox = "assets/icons/marked.svg";
-  static const back = "assets/icons/back.svg";
+  static const back = "assets/icons/back_arrow.svg";
   static const star = "assets/icons/star.svg";
   static const increment = "assets/icons/increment.svg";
   static const decrement = "assets/icons/decrement.svg";

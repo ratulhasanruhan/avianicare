@@ -50,6 +50,7 @@ dependencies:
   archive: ^3.6.1
   flutter_native_splash: ^2.4.1
   flutter_floating_bottom_bar: ^1.2.1+1
+  share_plus: 7.2.2
 
 
 dev_dependencies:

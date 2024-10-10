@@ -201,7 +201,7 @@ class _CartScreenState extends State<CartScreen> {
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 40.h),
+                      SizedBox(height: 80.h),
                     ],
                   ),
                 ],

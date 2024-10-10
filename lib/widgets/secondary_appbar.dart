@@ -11,9 +11,11 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   SecondaryAppBar({
     super.key,
     this.onTap,
+    this.title,
   });
 
   final void Function()? onTap;
+  final String? title;
 
   final cartController = Get.put(CartController());
 
@@ -22,6 +24,13 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leadingWidth: 54.w,
       backgroundColor: AppColor.primaryBackgroundColor,
+      centerTitle: true,
+      title: Text(
+        title ?? '',
+        style: TextStyle(
+          color: AppColor.titleTextColor,
+        ),
+      ),
       leading: Container(
         padding: EdgeInsets.only(left: 16.w, right: 16.w),
         child: GestureDetector(
