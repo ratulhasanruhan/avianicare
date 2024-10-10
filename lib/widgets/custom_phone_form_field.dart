@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../config/theme/app_color.dart';
 
 class CustomPhoneFormField extends StatefulWidget {
@@ -23,7 +22,8 @@ class _CustomPhoneFormField extends State<CustomPhoneFormField> {
   Widget build(BuildContext context) {
     return SizedBox(
       child: TextFormField(
-        style: GoogleFonts.urbanist(
+        style: TextStyle(
+          fontFamily: "SUSE",
             color: AppColor.textColor,
             fontSize: 16.sp,
             fontWeight: FontWeight.w500),
@@ -48,7 +48,9 @@ class _CustomPhoneFormField extends State<CustomPhoneFormField> {
             borderRadius: BorderRadius.circular(10.r),
           ),
           hintText: "17XXXXXXXX",
-          hintStyle: GoogleFonts.roboto(
+          hintStyle: TextStyle(
+
+            fontFamily: "SUSE",
               color: Color(0xFFCECECE)),
         ),
         validator: widget.validator,

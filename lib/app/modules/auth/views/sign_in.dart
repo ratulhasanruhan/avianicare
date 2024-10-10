@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:avianicare/main.dart';
 import 'package:avianicare/widgets/appbar3.dart';
 
@@ -91,7 +90,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     children: [
                       Text(
                         "Sign In".tr,
-                        style: GoogleFonts.roboto(
+                        style: TextStyle(
+                          fontFamily: "SUSE",
                           fontSize: 30,
                           color: Colors.black,
                         ),
@@ -136,7 +136,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                               authController.countryCodeModel!
                                                   .data![index].callingCode
                                                   .toString(),
-                                              style: GoogleFonts.urbanist(
+                                              style: TextStyle(
+                                                fontFamily: "SUSE",
                                                   color: AppColor.textColor,
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 16.sp),
@@ -146,7 +147,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                     children: [
                                       Text(
                                         authController.countryCode,
-                                        style: GoogleFonts.urbanist(
+                                        style: TextStyle(
+                                            fontFamily: "SUSE",
                                             color: AppColor.textColor,
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w500),
@@ -164,7 +166,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             SizedBox(height: 16.h),
                             TextFormField(
-                              style: GoogleFonts.roboto(
+                              style: TextStyle(
+                                fontFamily: "SUSE",
                                   color: AppColor.textColor,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16.sp),
@@ -220,7 +223,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 child: Text(
                                   "Forgot Password?".tr,
                                   textAlign: TextAlign.left,
-                                  style: GoogleFonts.roboto(
+                                  style: TextStyle(
+                                    fontFamily: "SUSE",
                                     fontSize: 16,
                                     color: Color(0xFF575353),
                                 ),
@@ -288,7 +292,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                     },
                                     child: Text(
                                       "Create an Account",
-                                      style: GoogleFonts.roboto(
+                                      style: TextStyle(
+                                        fontFamily: "SUSE",
                                         fontSize: 16,
                                         color: Color(0xFF010101),
                                         fontWeight: FontWeight.w500,

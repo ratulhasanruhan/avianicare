@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:avianicare/app/modules/auth/controller/auth_controler.dart';
 import 'package:avianicare/app/modules/auth/views/sign_in.dart';
 import 'package:avianicare/utils/svg_icon.dart';
@@ -68,7 +67,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       Text(
                         "Sign Up".tr,
-                        style: GoogleFonts.roboto(
+                        style: TextStyle(
+                          fontFamily: "SUSE",
                           fontSize: 30,
                           color: Colors.black,
                         ),
@@ -116,7 +116,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               authController.countryCodeModel!
                                                   .data![index].callingCode
                                                   .toString(),
-                                              style: GoogleFonts.urbanist(
+                                              style: TextStyle(
+                                                fontFamily: "SUSE",
                                                   color: AppColor.textColor,
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 16.sp),
@@ -126,7 +127,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     children: [
                                       Text(
                                         authController.countryCode,
-                                        style: GoogleFonts.urbanist(
+                                        style: TextStyle(
+                                          fontFamily: "SUSE",
                                             color: AppColor.textColor,
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w500),
@@ -151,7 +153,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             SizedBox(height: 14.h),
                             TextFormField(
-                              style: GoogleFonts.roboto(
+                              style: TextStyle(
+                                fontFamily: "SUSE",
                                   color: AppColor.textColor,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16.sp),
@@ -245,7 +248,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     },
                                     child: Text(
                                       "Log In",
-                                      style: GoogleFonts.roboto(
+                                      style: TextStyle(
+                                        fontFamily: "SUSE",
                                         fontSize: 16,
                                         color: Color(0xFF010101),
                                         fontWeight: FontWeight.w500,

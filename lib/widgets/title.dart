@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../config/theme/app_color.dart';
 
 // ignore: must_be_immutable
@@ -13,7 +11,8 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$text',
-      style: GoogleFonts.roboto(
+      style: TextStyle(
+        fontFamily: "SUSE",
           color: AppColor.titleTextColor,
           fontWeight: FontWeight.w500,
           fontSize: 20.sp),

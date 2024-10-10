@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:avianicare/app/modules/auth/controller/auth_controler.dart';
 import 'package:avianicare/app/modules/auth/controller/swap_title_controller.dart';
 import 'package:avianicare/utils/svg_icon.dart';
@@ -115,20 +114,23 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                               authController.countryCodeModel!
                                                   .data![index].callingCode
                                                   .toString(),
-                                              style: GoogleFonts.urbanist(
+                                              style: TextStyle(
                                                   color: AppColor.textColor,
                                                   fontWeight: FontWeight.w500,
-                                                  fontSize: 16.sp),
+                                                  fontFamily: "SUSE",
+                                                  fontSize: 16.sp
+                                              ),
                                             ),
                                           )),
                                   child: Row(
                                     children: [
                                       Text(
                                         authController.countryCode,
-                                        style: GoogleFonts.urbanist(
+                                        style: TextStyle(
                                             color: AppColor.textColor,
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.w500),
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "SUSE",
+                                            fontSize: 16.sp),
                                       ),
                                       SizedBox(
                                         width: 5.w,

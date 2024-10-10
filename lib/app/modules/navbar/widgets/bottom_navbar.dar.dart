@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../config/theme/app_color.dart';
 
 class BottomNavItem extends StatelessWidget {
@@ -43,7 +41,8 @@ class BottomNavItem extends StatelessWidget {
                 child: Text(
                   tittle!,
                   maxLines: 1,
-                  style: GoogleFonts.urbanist(
+                  style: TextStyle(
+                    fontFamily: "SUSE",
                     fontSize: 12.sp,
                     color: isSelected
                         ? AppColor.primaryColor

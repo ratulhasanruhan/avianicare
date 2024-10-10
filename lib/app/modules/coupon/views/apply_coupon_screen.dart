@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:avianicare/app/modules/auth/views/sign_in.dart';
 import 'package:avianicare/app/modules/cart/controller/cart_controller.dart';
 import 'package:avianicare/app/modules/coupon/widgets/coupon.dart';
@@ -89,12 +88,14 @@ class _ApplyCouponScreenState extends State<ApplyCouponScreen> {
                             }
                             return null;
                           },
-                          style: GoogleFonts.urbanist(
+                          style: TextStyle(
+                            fontFamily: "SUSE",
                               color: AppColor.textColor,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w400),
                           decoration: InputDecoration(
-                            hintStyle: GoogleFonts.urbanist(
+                            hintStyle: TextStyle(
+                              fontFamily: "SUSE",
                                 color: AppColor.textColor1,
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w400),

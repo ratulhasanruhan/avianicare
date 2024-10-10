@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../config/theme/app_color.dart';
 
 class CustomFormField extends StatelessWidget {
@@ -29,7 +28,8 @@ class CustomFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: TextFormField(
-        style: GoogleFonts.roboto(
+        style: TextStyle(
+          fontFamily: "SUSE",
             color: AppColor.textColor,
             fontWeight: FontWeight.w500,
             fontSize: 16.sp),
@@ -59,7 +59,8 @@ class CustomFormField extends StatelessWidget {
           label: Text(
             hintText ?? '',
           ),
-          labelStyle: GoogleFonts.roboto(
+          labelStyle: TextStyle(
+            fontFamily: "SUSE",
               color: Color(0xFF5C5C5C),
           ),
         ),

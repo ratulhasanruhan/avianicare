@@ -48,7 +48,6 @@ dependencies:
   flutter_inappwebview: ^5.7.2+3
   win32: ^5.5.3
   archive: ^3.6.1
-  flutter_native_splash: ^2.4.1
   flutter_floating_bottom_bar: ^1.2.1+1
   share_plus: 7.2.2
 
@@ -69,13 +68,27 @@ flutter:
     - assets/product-details/
 
 
+  fonts:
+    - family: SUSE
+      fonts:
+        - asset: assets/fonts/SUSE-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/SUSE-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/SUSE-Light.ttf
+          weight: 300
+        - asset: assets/fonts/SUSE-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/SUSE-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/SUSE-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/SUSE-Thin.ttf
+          weight: 200
 
 flutter_launcher_icons:
   android: "ic_launcher"
   image_path: "assets/images/icon.png"
 
 
-flutter_native_splash:
-  color: "#479B76"
-  image: assets/images/logo.png
-  branding: assets/images/logo.png
+
