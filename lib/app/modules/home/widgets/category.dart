@@ -34,8 +34,8 @@ class CategoryWidget extends StatelessWidget {
                   );
                 },
                 child: SizedBox(
-                  height: 140.h,
-                  width: 100.w,
+                  height: 150.h,
+                  width: 125.w,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -43,7 +43,7 @@ class CategoryWidget extends StatelessWidget {
                         imageUrl: category[index].thumb.toString(),
                         imageBuilder: (context, imageProvider) => Container(
                           height: 100.h,
-                          width: 93.w,
+                          width: 120.w,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             image: DecorationImage(

@@ -1,4 +1,5 @@
 import 'package:avianicare/app/modules/search/views/search_screen.dart';
+import 'package:avianicare/app/modules/wishlist/views/wishlist_screen.dart';
 import 'package:avianicare/config/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,9 +21,6 @@ class AppBarWidget extends StatelessWidget {
   final String? svgIcon;
   final String? title;
   final bool? isSearch;
-
-  final CartController cartController = Get.put(CartController());
-
 
   @override
   Widget build(BuildContext context) {
@@ -101,35 +99,19 @@ class AppBarWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: InkWell(
-                  onTap: onTap,
+                  onTap: () {
+                    Get.to(() => WishlistScreen());
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 2),
                         child: SvgPicture.asset(
-                          'assets/images/cart.svg',
+                          SvgIcon.heart,
                           height: 22,
                         ),
                       ),
-
-                      Obx(() => cartController.cartItems.isNotEmpty
-                          ? Row(
-                            children: [
-                              SizedBox(
-                                width: 6,
-                              ),
-                              Text(
-                                  cartController.cartItems.length.toString(),
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18
-                                  ),
-                                ),
-                            ],
-                          )
-                          : const SizedBox())
                     ],
                   ),
                 ),

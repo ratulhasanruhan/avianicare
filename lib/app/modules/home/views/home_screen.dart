@@ -708,8 +708,8 @@ class HomeScreen extends StatelessWidget {
                                                   ),
                                                 )
                                               : Ink(
-                                                  height: 90,
-                                                  width: 100,
+                                                  height: 100,
+                                                  width: 110,
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     border: Border.all(
@@ -740,7 +740,7 @@ class HomeScreen extends StatelessWidget {
                                                             imageBuilder: (context,
                                                                     imageProvider) =>
                                                                 Container(
-                                                                  height: 20.h,
+                                                                  height: 50.h,
                                                                   width: 60.w,
                                                                   decoration:
                                                                       BoxDecoration(
@@ -749,7 +749,7 @@ class HomeScreen extends StatelessWidget {
                                                                             imageProvider),
                                                                   ),
                                                                 )),
-                                                        SizedBox(height: 20.h),
+                                                        SizedBox(height: 5.h),
                                                         CustomText(
                                                           text: brandController
                                                                   .brandModel

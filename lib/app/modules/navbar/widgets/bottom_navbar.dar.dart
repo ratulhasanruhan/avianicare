@@ -43,7 +43,7 @@ class BottomNavItem extends StatelessWidget {
                   maxLines: 1,
                   style: TextStyle(
                     fontFamily: "SUSE",
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     color: isSelected
                         ? AppColor.primaryColor
                         : AppColor.deSelectedColor,

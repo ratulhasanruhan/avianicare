@@ -151,7 +151,7 @@ class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateM
                 end: 0,
                 offset: 10,
                 barAlignment: Alignment.bottomCenter,
-                iconHeight: 35,
+                iconHeight: 30,
                 iconWidth: 35,
                 reverse: false,
                 hideOnScroll: true,
@@ -169,15 +169,13 @@ class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateM
                   indicator: BoxDecoration(),
                   tabs: [
                     SizedBox(
-                      height: 55,
-                      width: 40,
+                      height: 60,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            'assets/images/home.svg',
-                            color: currentPage == 0 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                            currentPage == 0 ? 'assets/images/home_select.svg': 'assets/images/home.svg',
                           ),
                           SizedBox(
                             height: 2,
@@ -192,15 +190,22 @@ class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateM
                       ),
                     ),
                     SizedBox(
-                      height: 55,
-                      width: 50,
+                      height: 60,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SvgPicture.asset(
-                            'assets/images/cart.svg',
-                            color: currentPage == 1 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                          Obx( () {
+                              return Badge(
+                                label: Text(cartController.totalItems.toString()),
+                                alignment: Alignment.topRight,
+                                smallSize: 5,
+                                isLabelVisible: cartController.totalItems > 0,
+                                child: SvgPicture.asset(
+                                  currentPage == 1 ? 'assets/images/cart_select.svg' :'assets/images/cart.svg',
+                                ),
+                              );
+                            }
                           ),
                           SizedBox(
                             height: 2,
@@ -215,15 +220,13 @@ class _NavBarViewState extends State<NavBarView> with SingleTickerProviderStateM
                       ),
                     ),
                     SizedBox(
-                      height: 55,
-                      width: 55,
+                      height: 60,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            'assets/images/profile.svg',
-                            color: currentPage == 2 ? AppColor.primaryColor : AppColor.unSelectedColor,
+                            currentPage == 2 ? 'assets/images/profile_select.svg' : 'assets/images/profile.svg',
                           ),
                           SizedBox(
                             height: 2,

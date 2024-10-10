@@ -488,7 +488,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             },
                             text: 'DELETE_ACCOUNT'.tr),
                       SizedBox(
-                        height: 40.h,
+                        height: 80.h,
                       ),
                     ],
                   ),
